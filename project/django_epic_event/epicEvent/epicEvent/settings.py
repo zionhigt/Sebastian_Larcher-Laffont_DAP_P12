@@ -47,8 +47,14 @@ INSTALLED_APPS = [
     'corsheaders',
     'contrat',
     'event',
-    'customer'
+    'customer',
+    'guardian'
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'guardian.backends.ObjectPermissionBackend'
+)
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
