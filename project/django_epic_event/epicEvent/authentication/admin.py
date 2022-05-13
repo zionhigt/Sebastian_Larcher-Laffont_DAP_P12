@@ -16,7 +16,7 @@ class UserAdmin(admin.ModelAdmin):
     ]
 
     def get_form(self, request, obj=None, **kwargs):
-        self.exclude = ("groups", )
+        # self.exclude = ("groups", )
         form = super().get_form(request, obj, **kwargs)
         return form
 
