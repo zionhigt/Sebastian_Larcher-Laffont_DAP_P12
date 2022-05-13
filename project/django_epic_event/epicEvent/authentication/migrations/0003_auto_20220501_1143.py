@@ -110,9 +110,11 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('authentication', '0002_role_alter_user_options_user_manager_id_and_more'),
-        ('event', '0002_alter_event_description'),
-        ('contrat', '0001_initial'),
-        ('customer', '0001_initial'),
+        ('admin', '__latest__'),
+        ('contenttypes', '__latest__'),
+        ('event', '__latest__'),
+        ('contrat', '__latest__'),
+        ('customer', '__latest__'),
     ]
 
     operations = [
