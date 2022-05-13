@@ -1,7 +1,7 @@
+from xml.dom import ValidationErr
 from django.contrib import admin
 from authentication.models import User
-from django.contrib.auth.models import Group
-from authentication.models import Role
+from django.db.utils import IntegrityError
 
 # Old way:
 #class AuthorAdmin(admin.ModelAdmin):
@@ -11,26 +11,23 @@ from authentication.models import Role
 class UserAdmin(admin.ModelAdmin):
     list_display = [
         "first_name",
-         "last_name",
-          "email"
+        "last_name",
+        "email",
     ]
 
     def get_form(self, request, obj=None, **kwargs):
-        # self.exclude = ("groups", )
+        self.exclude = (
+            "groups",
+            "last_login",
+            "date_joined",
+        )
         form = super().get_form(request, obj, **kwargs)
         return form
 
     def save_model(self, request, obj, form, change):
         super().save_model(request, obj, form, change)
         role_id = request.POST.get("role", [False])[0]
-        role = Role.objects.get(pk=int(role_id))
-        group = Group.objects.get(name=role.name.lower() + 's')
-        user = User.objects.get(email=obj.email)
-        print(len(user.groups.all()))
-        for old_group in obj.groups.all():
-            user.groups.remove(old_group)
-        user.groups.add(group)
-        print(user.groups.all())
+        obj.set_role(role_id)
 
 
 admin.site.register(User, UserAdmin)
