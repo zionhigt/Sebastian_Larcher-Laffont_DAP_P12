@@ -9,6 +9,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('authentication', '0001_initial'),
+        
     ]
 
     operations = [
@@ -31,7 +32,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='user',
             name='email',
-            field=models.TextField(max_length=100),
+            field=models.CharField(max_length=100),
         ),
         migrations.AlterField(
             model_name='user',

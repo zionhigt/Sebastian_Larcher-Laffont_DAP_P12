@@ -1,10 +1,10 @@
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, Permission
 from django.db import models
 
 class User(AbstractUser):
     first_name = models.CharField(max_length=25)
     last_name = models.CharField(max_length=25)
-    email = models.TextField(max_length=100)
+    email = models.CharField(max_length=100)
     password = models.CharField(max_length=128)
     manager_id = models.ForeignKey("authentication.User", verbose_name="manager", on_delete=models.SET_NULL, related_name="manager", blank=True, null=True)
     role = models.ForeignKey("authentication.Role", on_delete=models.SET_NULL, blank=True, null=True)
@@ -17,5 +17,5 @@ class User(AbstractUser):
 class Role(models.Model):
     name = models.CharField(max_length=25)
 
-    def __str__(self):
-        return self.name
+    # def __str__(self):
+    #     return self.name

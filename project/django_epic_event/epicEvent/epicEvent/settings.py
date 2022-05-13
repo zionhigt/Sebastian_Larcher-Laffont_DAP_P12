@@ -48,12 +48,10 @@ INSTALLED_APPS = [
     'contrat',
     'event',
     'customer',
-    'guardian'
 ]
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-    'guardian.backends.ObjectPermissionBackend'
 )
 
 MIDDLEWARE = [
