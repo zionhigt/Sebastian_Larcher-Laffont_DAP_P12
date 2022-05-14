@@ -1,7 +1,5 @@
-from xml.dom import ValidationErr
 from django.contrib import admin
 from authentication.models import User
-from django.db.utils import IntegrityError
 
 # Old way:
 #class AuthorAdmin(admin.ModelAdmin):
@@ -22,7 +20,7 @@ class UserAdmin(admin.ModelAdmin):
             "date_joined",
         )
         form = super().get_form(request, obj, **kwargs)
-        return form
+        return form 
 
     def save_model(self, request, obj, form, change):
         super().save_model(request, obj, form, change)
