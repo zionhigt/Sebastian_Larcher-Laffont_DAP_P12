@@ -5,6 +5,17 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Python : Django runserver",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/project/django_epic_event/epicEvent/manage.py",
+            "args": [
+                "runserver"
+            ],
+            "django": true,
+            "justMyCode": true
+        },
+        {
             "name": "Python : Django migrate",
             "type": "python",
             "request": "launch",
