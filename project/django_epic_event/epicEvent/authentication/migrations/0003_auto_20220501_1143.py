@@ -132,7 +132,7 @@ class Migration(migrations.Migration):
         ('authentication', '0002_role_alter_user_options_user_manager_id_and_more'),
         ('event', '__latest__'),
         ('contrat', '__latest__'),
-        ('customer', '__latest__'),
+        ('customer', '0001_initial'),
     ]
 
     operations = [
