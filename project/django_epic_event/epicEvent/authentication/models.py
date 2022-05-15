@@ -16,6 +16,16 @@ class Role(models.Model):
     def get_manager_role_id(self):
         return Role.objects.get_or_create(name="MANAGER")[0].id
 
+    @classmethod
+    def get_role_by_name(self, role_name):
+        try:
+            role = self.objects.get(name=role_name.upper())
+            return role
+        except self.DoesNotExist:
+            return None
+
+
+
 def manager_validator(manager_id):
     try:
         manager = User.objects.get(pk=manager_id)
@@ -24,8 +34,6 @@ def manager_validator(manager_id):
     if manager.role.id != Role.get_manager_role_id():
         raise ValidationError("This user cannot be assigned as a manager")
 
-def get_manager_role_id():
-    return Role.get_manager_role_id()
 
 class User(AbstractUser):
     first_name = models.CharField(max_length=25)
@@ -39,7 +47,7 @@ class User(AbstractUser):
         related_name="manager",
         blank=True, null=True,
         validators=[manager_validator],
-        limit_choices_to={"role_id": get_manager_role_id()}
+        limit_choices_to={"role_id": Role.get_manager_role_id()}
         )
     role = models.ForeignKey("authentication.Role", on_delete=models.SET_NULL, blank=True, null=True)
 
