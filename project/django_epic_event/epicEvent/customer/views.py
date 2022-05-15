@@ -1,4 +1,5 @@
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import IsAuthenticated
 
 from customer.serializers import CustomerListSerializer, CustomerUpdateSerializer, CustomerDetailSerializer
 
@@ -7,7 +8,7 @@ class CustomerViewSet(ModelViewSet):
     list_serializer_class = CustomerListSerializer
     detail_serializer_class = CustomerDetailSerializer
     update_serializer_class = CustomerUpdateSerializer
-    permission_classes = []
+    permission_classes = [IsAuthenticated, ]
 
     def get_queryset(self):
         pass
