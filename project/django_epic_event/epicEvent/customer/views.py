@@ -2,13 +2,14 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
 
 from customer.serializers import CustomerListSerializer, CustomerUpdateSerializer, CustomerDetailSerializer
+from customer.permissions import IsAuthorOrReadOnly
 
 
 class CustomerViewSet(ModelViewSet):
     list_serializer_class = CustomerListSerializer
     detail_serializer_class = CustomerDetailSerializer
     update_serializer_class = CustomerUpdateSerializer
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [IsAuthenticated, IsAuthorOrReadOnly, ]
 
     def get_queryset(self):
         pass
