@@ -1,4 +1,5 @@
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import IsAuthenticated
 
 from event.serializers import EventListSerializer, EventUpdateSerializer, EventDetailSerializer
 
@@ -7,7 +8,7 @@ class EventViewSet(ModelViewSet):
     list_serializer_class = EventListSerializer
     detail_serializer_class = EventDetailSerializer
     update_serializer_class = EventUpdateSerializer
-    permission_classes = []
+    permission_classes = [IsAuthenticated, ]
 
     def get_queryset(self):
         pass

@@ -1,4 +1,5 @@
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import IsAuthenticated
 
 from contrat.serializers import ContratListSerializer, ContratUpdateSerializer, ContratDetailSerializer
 
@@ -7,7 +8,7 @@ class ContratViewSet(ModelViewSet):
     list_serializer_class = ContratListSerializer
     detail_serializer_class = ContratDetailSerializer
     update_serializer_class = ContratUpdateSerializer
-    permission_classes = []
+    permission_classes = [IsAuthenticated, ]
 
     def get_queryset(self):
         pass

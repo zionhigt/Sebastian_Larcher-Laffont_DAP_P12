@@ -23,11 +23,10 @@ class CustomerUpdateSerializer(ModelSerializer):
         fields = [
             "first_name",
             "last_name",
-            "last_name",
             "company_name",
             "sale_contact_id",
             "status",
-            "modile",
+            "mobile",
             "phone",
         ]
 
@@ -44,7 +43,7 @@ class CustomerDetailSerializer(ModelSerializer):
             "company_name",
             "sale_contact_id",
             "status",
-            "modile",
+            "mobile",
             "phone",
             "date_created",
             "date_updated",
