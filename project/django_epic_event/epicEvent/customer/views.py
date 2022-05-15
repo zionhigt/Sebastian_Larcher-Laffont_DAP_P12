@@ -1,3 +1,24 @@
-from django.shortcuts import render
+from rest_framework.viewsets import ModelViewSet
 
-# Create your views here.
+from customer.serializers import CustomerListSerializer, CustomerUpdateSerializer, CustomerDetailSerializer
+
+
+class CustomerViewSet(ModelViewSet):
+    list_serializer_class = CustomerListSerializer
+    detail_serializer_class = CustomerDetailSerializer
+    update_serializer_class = CustomerUpdateSerializer
+    permission_classes = []
+
+    def get_queryset(self):
+        pass
+
+    def get_serializer_class(self):
+        if self.action in ['update', 'partial_update']:
+            return self.update_serializer_class
+        if self.action in ['list']:
+            return self.list_serializer_class
+        if self.action in ['retrieve', 'create']:
+            return self.detail_serializer_class
+
+        return super().get_serializer_class()
+
