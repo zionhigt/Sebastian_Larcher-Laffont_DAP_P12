@@ -32,7 +32,7 @@ def create_groups(apps, schema_migration):
     User = apps.get_model('authentication', 'User')
     Group = apps.get_model('auth', 'Group')
     Permission = apps.get_model('auth', 'Permission')
-    emit_post_migrate_signal(2, False, 'default') 
+    emit_post_migrate_signal(2, False, 'default')
     [
         add_user,
         change_user,
@@ -46,7 +46,7 @@ def create_groups(apps, schema_migration):
         delete_contrat,
         view_contrat,
     ] = get_basis_permissions(apps, Permission, "contrat")
-    print(add_contrat)
+    
     [
         add_event,
         change_event,
