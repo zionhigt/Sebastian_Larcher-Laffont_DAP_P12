@@ -139,7 +139,7 @@ REST_FRAMEWORK = {
 SECRET_KEY = os.environ.get("TOKEN_SECRET")
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(seconds=900)
+    'ACCESS_TOKEN_LIFETIME': timedelta(seconds=3600)
 }
 
 
