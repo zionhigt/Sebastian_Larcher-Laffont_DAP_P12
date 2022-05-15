@@ -6,14 +6,30 @@ class CustomerListSerializer(ModelSerializer):
 
     class Meta:
         model = Customer
-        fields = ['id',]
+        fields = [
+            'id',
+            "first_name",
+            "last_name",
+            "company_name",
+            "sale_contact_id",
+            "status",
+        ]
 
 
 class CustomerUpdateSerializer(ModelSerializer):
 
     class Meta:
         model = Customer
-        fields = ['id',]
+        fields = [
+            "first_name",
+            "last_name",
+            "last_name",
+            "company_name",
+            "sale_contact_id",
+            "status",
+            "modile",
+            "phone",
+        ]
 
 
 class CustomerDetailSerializer(ModelSerializer):
@@ -22,8 +38,20 @@ class CustomerDetailSerializer(ModelSerializer):
         model = Customer
         fields = [
             'id',
+            "first_name",
+            "last_name",
+            "email",
+            "company_name",
+            "sale_contact_id",
+            "status",
+            "modile",
+            "phone",
+            "date_created",
+            "date_updated",
         ]
 
         read_only_fields = [
             'id',
+            "date_created",
+            "date_updated",
         ]
