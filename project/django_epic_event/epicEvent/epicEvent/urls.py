@@ -46,6 +46,7 @@ contrats_url_paterns = [
     path('api/contrat/create/', ContratViewSet.as_view({"post": "create"}), name='create_contrat'),
     path('api/contrat/update/<int:pk>/', ContratViewSet.as_view({"put": "update"}), name='update_contrat'),
     path('api/contrat/delete/<int:pk>/', ContratViewSet.as_view({"delete": "delete"}), name='delete_contrat'),
+    path('api/contrat/sign/<int:pk>/', ContratViewSet.as_view({"patch": "sign"}), name='sign_contrat'),
 ]
 
 urlpatterns = [
