@@ -13,44 +13,14 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path
 
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from authentication.urls import authentication_url_paterns
+from customer.urls import customers_url_paterns
+from contrat.urls import contrats_url_paterns
+from event.urls import events_url_paterns
 
-from authentication.views import RegisterViewSet
 
-from customer.views import CustomerViewSet
-from contrat.views import ContratViewSet
-from event.views import EventViewSet
-
-customers_url_paterns = [
-    path('api/customer/', CustomerViewSet.as_view({"get": "list"}), name='list_customers'),
-    path('api/customer/<int:pk>/', CustomerViewSet.as_view({"get": "retrieve"}), name='list_customers'),
-    path('api/customer/create/', CustomerViewSet.as_view({"post": "create"}), name='create_customer'),
-    path('api/customer/update/<int:pk>/', CustomerViewSet.as_view({"put": "update"}), name='update_customer'),
-    path('api/customer/delete/<int:pk>/', CustomerViewSet.as_view({"delete": "delete"}), name='delete_customer'),
-]
-
-events_url_paterns = [
-    path('api/event/', EventViewSet.as_view({"get": "list"}), name='list_events'),
-    path('api/event/<int:pk>/', EventViewSet.as_view({"get": "retrieve"}), name='list_events'),
-    path('api/event/create/', EventViewSet.as_view({"post": "create"}), name='create_event'),
-    path('api/event/update/<int:pk>/', EventViewSet.as_view({"put": "update"}), name='update_event'),
-    path('api/event/delete/<int:pk>/', EventViewSet.as_view({"delete": "delete"}), name='delete_event'),
-]
-
-contrats_url_paterns = [
-    path('api/contrat/', ContratViewSet.as_view({"get": "list"}), name='list_contrats'),
-    path('api/contrat/<int:pk>/', ContratViewSet.as_view({"get": "retrieve"}), name='list_contrats'),
-    path('api/contrat/create/', ContratViewSet.as_view({"post": "create"}), name='create_contrat'),
-    path('api/contrat/update/<int:pk>/', ContratViewSet.as_view({"put": "update"}), name='update_contrat'),
-    path('api/contrat/delete/<int:pk>/', ContratViewSet.as_view({"delete": "delete"}), name='delete_contrat'),
-]
-
-urlpatterns = [
-    path('api/login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/login/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('api/user/create/', RegisterViewSet.as_view({"get": "list"}), name='signup'),
-    path('admin/', admin.site.urls)
-] + customers_url_paterns + events_url_paterns + contrats_url_paterns
+urlpatterns = authentication_url_paterns + \
+                customers_url_paterns + \
+                events_url_paterns + \
+                contrats_url_paterns

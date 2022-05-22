@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'contrat',
     'event',
     'customer',
+    'django-filters',
 ]
 
 AUTHENTICATION_BACKENDS = (
@@ -133,7 +134,10 @@ AUTH_USER_MODEL = 'authentication.User'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication'
-    ]
+    ],
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend'
+    ],
 }
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("TOKEN_SECRET")
