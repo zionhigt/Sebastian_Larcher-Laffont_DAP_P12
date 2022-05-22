@@ -1,2 +1,2 @@
-DROP DATABASE epic_event;
-CREATE DATABASE epic_event;
+DROP DATABASE epic_event_migration_test;
+CREATE DATABASE epic_event_migration_test;
