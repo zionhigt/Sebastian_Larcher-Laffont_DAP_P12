@@ -43,22 +43,22 @@ class ContratDetailSerializer(ModelSerializer):
             "customer_id",
         ]
 
-# class ContratSignSerializer(ModelSerializer):
+class ContratSignSerializer(ModelSerializer):
 
-#     class Meta:
-#         model = Contrat
-#         fields = [
-#             "status",
-#         ]
+    class Meta:
+        model = Contrat
+        fields = [
+            "status",
+        ]
     
-#     def create_event(*args, **kwargs):
-#         Event.create(**kwargs)
+    def create_event(*args, **kwargs):
+        Event.create(**kwargs)
 
-#     def update(self, validated_data):
-#         event = {
-#             "name": validated_data.get("", ""),
-#             "description": validated_data.get("", ""),
-#             "support_contact_id": validated_data.get("", ""),
-#             "contrat_id": validated_data.get("", ""),
-#         }
-#         self.create_event(name, contrat_id, description, )
+    def update(self, validated_data):
+        event = {
+            "name": validated_data.get("", ""),
+            "description": validated_data.get("", ""),
+            "support_contact_id": validated_data.get("", ""),
+            "contrat_id": validated_data.get("", ""),
+        }
+        self.create_event(name, contrat_id, description, )

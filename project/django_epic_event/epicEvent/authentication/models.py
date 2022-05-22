@@ -14,7 +14,8 @@ class Role(models.Model):
 
     @classmethod
     def get_manager_role_id(self):
-        return Role.objects.get_or_create(name="MANAGER")[0].id
+        role = Role.objects.get(name="MANAGER")
+        return role
 
     @classmethod
     def get_role_by_name(self, role_name):
@@ -25,13 +26,12 @@ class Role(models.Model):
             return None
 
 
-
 def manager_validator(manager_id):
     try:
         manager = User.objects.get(pk=manager_id)
     except User.DoesNotExist:
         raise ValidationError("User not found for relation manager_id")
-    if manager.role.id != Role.get_manager_role_id():
+    if manager.role.name != "MANAGER":
         raise ValidationError("This user cannot be assigned as a manager")
 
 
@@ -40,6 +40,7 @@ class User(AbstractUser):
     last_name = models.CharField(max_length=25)
     email = models.CharField(max_length=100)
     password = models.CharField(max_length=128)
+    role = models.ForeignKey("Role", on_delete=models.SET_NULL, blank=True, null=True)
     manager_id = models.ForeignKey(
         "authentication.User",
         verbose_name="manager",
@@ -47,9 +48,7 @@ class User(AbstractUser):
         related_name="manager",
         blank=True, null=True,
         validators=[manager_validator],
-        limit_choices_to={"role_id": Role.get_manager_role_id()}
         )
-    role = models.ForeignKey("authentication.Role", on_delete=models.SET_NULL, blank=True, null=True)
 
 
     class Meta:
@@ -79,4 +78,7 @@ class User(AbstractUser):
 
     def set_password(self, raw_password):
         self.password = make_password(raw_password)
+
+    def as_staff(self):
+        self.is_staff = True
 
