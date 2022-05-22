@@ -14,12 +14,17 @@ class UserAdmin(admin.ModelAdmin):
         "groups",
         "last_login",
         "date_joined",
+        "is_staff"
     )
     list_display = [
         "first_name",
         "last_name",
         "email",
     ]
+    def get_form(self, *args, **kwargs):
+        form = super().get_form(*args, **kwargs)
+        form.base_fields.get("manager_id").queryset = User.objects.filter(role__name="MANAGER")
+        return form
 
     def append_to_exclude(self, *args):
         exclude = list(self.exclude)
@@ -39,7 +44,9 @@ class UserAdmin(admin.ModelAdmin):
                 obj.set_password(password)
         else:
             obj.set_password(password)
-            
+        
+        obj.as_staff()
+
         super().save_model(request, obj, form, change)
         role_id = request.POST.get("role", [False])
         if role_id:
