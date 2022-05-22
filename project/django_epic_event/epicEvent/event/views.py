@@ -1,5 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
+from django_filters.rest_framework import DjangoFilterBackend
 
 from event.serializers import EventListSerializer, EventUpdateSerializer, EventDetailSerializer
 from event.permissions import IsAuthorOrReadOnly
@@ -11,8 +12,15 @@ class EventViewSet(ModelViewSet):
     update_serializer_class = EventUpdateSerializer
     permission_classes = [IsAuthenticated, IsAuthorOrReadOnly, ]
 
-    def get_queryset(self):
-        pass
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = [
+        'contrat_id__customer_id__name',
+        'contrat_id__customer_id__email',
+        'contrat_id__date_created',
+    ]
+
+    # def get_queryset(self):
+    #     pass
 
     def get_serializer_class(self):
         if self.action in ['update', 'partial_update']:
