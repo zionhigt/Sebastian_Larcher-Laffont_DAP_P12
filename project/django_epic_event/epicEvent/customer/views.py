@@ -1,5 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
+from django_filters.rest_framework import DjangoFilterBackend
 
 from customer.serializers import CustomerListSerializer, CustomerUpdateSerializer, CustomerDetailSerializer
 from customer.permissions import IsAuthorOrReadOnly
@@ -11,8 +12,16 @@ class CustomerViewSet(ModelViewSet):
     update_serializer_class = CustomerUpdateSerializer
     permission_classes = [IsAuthenticated, IsAuthorOrReadOnly, ]
 
-    def get_queryset(self):
-        pass
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = [
+        'name',
+        'email',
+    ]
+
+
+
+    # def get_queryset(self):
+    #     pass
 
     def get_serializer_class(self):
         if self.action in ['update', 'partial_update']:

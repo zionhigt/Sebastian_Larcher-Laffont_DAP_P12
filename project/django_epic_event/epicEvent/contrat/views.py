@@ -1,5 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
+from django_filters.rest_framework import DjangoFilterBackend
 
 from contrat.serializers import (
     ContratListSerializer,
@@ -17,8 +18,15 @@ class ContratViewSet(ModelViewSet):
     sign_serializer_class = ContratSignSerializer
     permission_classes = [IsAuthenticated, IsAuthorOrReadOnly, ]
 
-    def get_queryset(self):
-        pass
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = [
+        'customer_id__name',
+        'customer_id__email',
+        'date_created', 'amount'
+    ]
+
+    # def get_queryset(self):
+    #     pass
 
     def get_serializer_class(self):
         if self.action in ['update', 'partial_update']:
