@@ -18,9 +18,12 @@ from authentication.urls import authentication_url_paterns
 from customer.urls import customers_url_paterns
 from contrat.urls import contrats_url_paterns
 from event.urls import events_url_paterns
+from django.urls import path
+
 
 
 urlpatterns = authentication_url_paterns + \
                 customers_url_paterns + \
                 events_url_paterns + \
-                contrats_url_paterns
+                contrats_url_paterns + \
+                [path("/sentry-error", lambda **kwargs: 1/0)]
