@@ -3,7 +3,7 @@ from django.db import models
 class Customer(models.Model):
     first_name = models.CharField(max_length=25)
     last_name = models.CharField(max_length=25)
-    email = models.CharField(max_length=100)
+    email = models.CharField(max_length=100, name="email")
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
     company_name = models.CharField(max_length=25, blank=True, null=True)
