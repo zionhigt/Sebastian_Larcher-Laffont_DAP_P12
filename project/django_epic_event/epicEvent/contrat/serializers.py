@@ -7,7 +7,7 @@ class ContratListSerializer(ModelSerializer):
 
     class Meta:
         model = Contrat
-        fields = ['id', "customer_id", "salesman_id"]
+        fields = ['id', "customer_id", "salesman_id", "amount"]
 
 
 class ContratUpdateSerializer(ModelSerializer):

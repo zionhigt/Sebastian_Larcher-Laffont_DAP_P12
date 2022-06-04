@@ -32,7 +32,10 @@ def create_groups(apps, schema_migration):
     User = apps.get_model('authentication', 'User')
     Group = apps.get_model('auth', 'Group')
     Permission = apps.get_model('auth', 'Permission')
+
+    # Emit post migration signal to write data
     emit_post_migrate_signal(2, False, 'default')
+    
     [
         add_user,
         change_user,
@@ -130,8 +133,8 @@ class Migration(migrations.Migration):
         ('admin', '__latest__'),
         ('contenttypes', '__latest__'),
         ('authentication', '0002_role_alter_user_options_user_manager_id_and_more'),
-        ('event', '__latest__'),
-        ('contrat', '__latest__'),
+        ('event', '0001_initial'),
+        ('contrat', '0001_initial'),
         ('customer', '0001_initial'),
     ]
 
