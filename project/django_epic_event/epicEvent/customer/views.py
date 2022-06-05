@@ -15,7 +15,7 @@ class CustomerViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated, IsAuthorOrReadOnly, ]
 
     filterset_customfields = {
-        "firtname": 'first_name',
+        "firstname": 'first_name',
         "lastname": 'last_name',
         "email": 'email',
     }

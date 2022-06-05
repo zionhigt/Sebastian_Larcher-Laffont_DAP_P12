@@ -26,4 +26,4 @@ urlpatterns = authentication_url_paterns + \
                 customers_url_paterns + \
                 events_url_paterns + \
                 contrats_url_paterns + \
-                [path("/sentry-error", lambda **kwargs: 1/0)]
+                [path("sentry-error/", lambda request: 1/0)]

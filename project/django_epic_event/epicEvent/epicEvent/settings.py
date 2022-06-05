@@ -21,9 +21,13 @@ load_dotenv()
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
+
 sentry_sdk.init(
-    dsn="https://examplePublicKey@o0.ingest.sentry.io/0",
-    integrations=[DjangoIntegration()],
+    debug=True,
+    dsn=os.environ.get("SENTRY_DSN"),
+    integrations=[DjangoIntegration(
+            transaction_style='url',
+        ),],
 
     # Set traces_sample_rate to 1.0 to capture 100%
     # of transactions for performance monitoring.

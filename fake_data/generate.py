@@ -155,6 +155,7 @@ def get_event(support_contact_id, contrat_id):
         "support_contact_id": support_contact_id,
         "contrat_id": contrat_id,
         "status_id": 1,
+        "date_event": fake.date(),
 
     }
 

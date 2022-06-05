@@ -12,6 +12,7 @@ class EventListSerializer(ModelSerializer):
             'support_contact_id',
             'contrat_id',
             'status',
+            'date_event',
         ]
 
 
