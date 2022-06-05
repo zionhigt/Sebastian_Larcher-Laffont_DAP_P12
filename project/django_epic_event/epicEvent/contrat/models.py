@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Contrat(models.Model):
     customer_id = models.ForeignKey("customer.Customer", related_name="customer_id", on_delete=models.CASCADE)
     salesman_id = models.ForeignKey("authentication.User", related_name="salesman", on_delete=models.CASCADE)

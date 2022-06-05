@@ -3,12 +3,6 @@ from django.forms import ValidationError
 from authentication.models import User
 
 
-
-# Old way:
-#class AuthorAdmin(admin.ModelAdmin):
-#    pass
-
-# With object permissions support
 class UserAdmin(admin.ModelAdmin):
     exclude = (
         "groups",
@@ -21,6 +15,7 @@ class UserAdmin(admin.ModelAdmin):
         "last_name",
         "email",
     ]
+
     def get_form(self, *args, **kwargs):
         form = super().get_form(*args, **kwargs)
         form.base_fields.get("manager_id").queryset = User.objects.filter(role__name="MANAGER")
@@ -44,7 +39,7 @@ class UserAdmin(admin.ModelAdmin):
                 obj.set_password(password)
         else:
             obj.set_password(password)
-        
+
         obj.as_staff()
 
         super().save_model(request, obj, form, change)

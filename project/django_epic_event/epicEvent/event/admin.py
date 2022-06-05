@@ -4,6 +4,7 @@ from authentication.models import User
 
 # Register your models here.
 
+
 class EventAdmin(admin.ModelAdmin):
     list_display = [
         "name",
@@ -19,5 +20,6 @@ class EventAdmin(admin.ModelAdmin):
         form = super().get_form(*args, **kwargs)
         form.base_fields.get("support_contact_id").queryset = User.objects.filter(role__name="SUPPORT")
         return form
+
 
 admin.site.register(Event, EventAdmin)

@@ -13,7 +13,7 @@ class EventViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated, IsAuthorOrReadOnly, ]
 
     filterset_customfields = {
-        "customer_firtname":'contrat_id__customer_id__first_name',
+        "customer_firtname": 'contrat_id__customer_id__first_name',
         "customer_lastname": 'contrat_id__customer_id__last_name',
         "customer_email": 'contrat_id__customer_id__email',
         "date_event": "date_event",
@@ -32,10 +32,10 @@ class EventViewSet(ModelViewSet):
                         param += "__in"
                     if len(value) == 1:
                         value = value[0]
-                    
+
                 new_params[param] = value
         return new_params
-    
+
     def get_queryset(self):
         filter_ids = []
         filters = self.parse_params(self.request.query_params)
@@ -56,4 +56,3 @@ class EventViewSet(ModelViewSet):
             return self.detail_serializer_class
 
         return super().get_serializer_class()
-

@@ -1,4 +1,3 @@
-from warnings import filters
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
 
@@ -31,7 +30,7 @@ class CustomerViewSet(ModelViewSet):
                         param += "__in"
                     if len(value) == 1:
                         value = value[0]
-                    
+
                 new_params[param] = value
 
         return new_params
@@ -44,7 +43,11 @@ class CustomerViewSet(ModelViewSet):
             all_records = all_records.filter(**filters)
         filter_ids = [int(record.id) for record in all_records]
         if self.request.user.role.name != "MANAGER":
-            filter_ids = [int(record.id) for record in all_records if record.sale_contact_id.id == self.request.user.id]
+            filter_ids = [
+                int(record.id)
+                for record in all_records
+                if record.sale_contact_id.id == self.request.user.id
+            ]
         return all_records.filter(id__in=filter_ids)
 
     def get_serializer_class(self):
@@ -56,4 +59,3 @@ class CustomerViewSet(ModelViewSet):
             return self.detail_serializer_class
 
         return super().get_serializer_class()
-
