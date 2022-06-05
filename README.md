@@ -1,7 +1,7 @@
 # Epic Event
 
 
-CRM, Oragnisation d'événements. 
+CRM, Organisation d'événements. 
 
 
 ## Prérequis
