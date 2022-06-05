@@ -3,6 +3,7 @@ from .serializers import RegisterSerializer
 
 from rest_framework.viewsets import ModelViewSet
 
+
 def is_manager(user):
     return user.__str__() != "AnonymousUser" and user.role.name == "MANAGER"
 

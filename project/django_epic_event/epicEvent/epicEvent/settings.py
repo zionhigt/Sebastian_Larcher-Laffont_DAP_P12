@@ -9,6 +9,8 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 from pathlib import Path
 
@@ -16,18 +18,14 @@ from datetime import timedelta
 
 import os
 from dotenv import load_dotenv
+
+
 load_dotenv()
-
-import sentry_sdk
-from sentry_sdk.integrations.django import DjangoIntegration
-
 
 sentry_sdk.init(
     debug=True,
     dsn=os.environ.get("SENTRY_DSN"),
-    integrations=[DjangoIntegration(
-            transaction_style='url',
-        ),],
+    integrations=[DjangoIntegration(), ],
 
     # Set traces_sample_rate to 1.0 to capture 100%
     # of transactions for performance monitoring.

@@ -1,8 +1,8 @@
-from django.contrib.auth.models import AbstractUser, Permission
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.contrib.auth.models import Group
 from django.forms import ValidationError
-from django.contrib.auth.hashers import make_password, is_password_usable
+from django.contrib.auth.hashers import make_password
 
 
 class Role(models.Model):
@@ -50,12 +50,10 @@ class User(AbstractUser):
         validators=[manager_validator],
         )
 
-
     class Meta:
         constraints = [
             models.UniqueConstraint(fields=["email"], name="unique_user"),
         ]
-
 
     def set_role(self, role_id):
         """Ensure that role corespond whith permission groups
@@ -75,10 +73,8 @@ class User(AbstractUser):
         [self.groups.remove(grp) for grp in list(self.groups.all())]
         self.groups.add(group)
 
-
     def set_password(self, raw_password):
         self.password = make_password(raw_password)
 
     def as_staff(self):
         self.is_staff = True
-

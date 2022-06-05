@@ -21,7 +21,6 @@ from event.urls import events_url_paterns
 from django.urls import path
 
 
-
 urlpatterns = authentication_url_paterns + \
                 customers_url_paterns + \
                 events_url_paterns + \

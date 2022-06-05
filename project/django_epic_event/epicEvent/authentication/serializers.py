@@ -1,7 +1,8 @@
-from rest_framework import serializers
 from authentication.models import User
-from rest_framework.validators import UniqueValidator
 from django.contrib.auth.password_validation import validate_password
+
+from rest_framework import serializers
+from rest_framework.validators import UniqueValidator
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 from authentication.models import Role
@@ -17,6 +18,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['identity'] = f"{user.first_name}.{user.last_name}"
         return token
 
+
 class RoleRelatedField(serializers.RelatedField):
     def display_value(self, instance):
         return instance
@@ -26,6 +28,7 @@ class RoleRelatedField(serializers.RelatedField):
 
     def to_internal_value(self, value):
         return Role.objects.get(name=value.upper())
+
 
 class RegisterSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(

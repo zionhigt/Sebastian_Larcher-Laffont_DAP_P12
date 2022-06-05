@@ -5,16 +5,15 @@ from contrat.serializers import (
     ContratListSerializer,
     ContratUpdateSerializer,
     ContratDetailSerializer,
-    ContratSignSerializer
 )
 from contrat.permissions import IsAuthorOrReadOnly
 from contrat.models import Contrat
+
 
 class ContratViewSet(ModelViewSet):
     list_serializer_class = ContratListSerializer
     detail_serializer_class = ContratDetailSerializer
     update_serializer_class = ContratUpdateSerializer
-    sign_serializer_class = ContratSignSerializer
     permission_classes = [IsAuthenticated, IsAuthorOrReadOnly, ]
 
     filterset_customfields = {
@@ -40,7 +39,7 @@ class ContratViewSet(ModelViewSet):
                         param += "__in"
                     if len(value) == 1:
                         value = value[0]
-                    
+
                 new_params[param] = value
         return new_params
 
@@ -62,7 +61,5 @@ class ContratViewSet(ModelViewSet):
             return self.list_serializer_class
         if self.action in ['retrieve', 'create']:
             return self.detail_serializer_class
-        if self.action in ['sign']:
-            return self.sign_serializer_class
 
         return super().get_serializer_class()
