@@ -7,6 +7,14 @@ CRM, Organisation d'événements.
 ## Prérequis
  - [Python > 3.7.2](https://www.python.org/downloads/)
  - [python-venv](https://docs.python.org/fr/3/library/venv.html)
+ - [PostgreSQL](https://www.postgresql.org/)
+
+## POSTGRESQL
+- Apres avoir installer le [SGBD](https://fr.wikipedia.org/wiki/Syst%C3%A8me_de_gestion_de_base_de_donn%C3%A9es#cite_ref-fundamentals_2-9) PostgreSQL
+sur votre machine
+- Créez une base de données epic_event ou au nom de votre choix
+- Notez bien que le nom doit correspondre au nom de la base déclarée dans le fichier .env (voir étape suivante)
+- Les tables seront crées à l'étape de migration
   
 ## Installation
 - Clonez/téléchargez ce projet
