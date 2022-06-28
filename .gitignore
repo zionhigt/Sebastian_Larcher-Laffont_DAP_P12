@@ -1,6 +1,6 @@
 __pycache__
-project/django_epic_event/env/
-project/django_epic_event/epicEvent/epicEvent/.env
+env/
+epicEvent/epicEvent/.env
 spec/
 databases
 
